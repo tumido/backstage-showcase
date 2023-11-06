@@ -29,6 +29,7 @@ import DynamicRootContext from '../DynamicRoot/DynamicRootContext';
 const AppBase = () => {
   const { AppProvider, AppRouter, dynamicRoutes } =
     useContext(DynamicRootContext);
+    console.log(__webpack_share_scopes__.default)
   return (
     <AppProvider>
       <AlertDisplay />
