@@ -64,11 +64,17 @@ export interface Config {
           };
         }[];
         routeBindings?: {
-          bindTarget: string;
-          bindMap: {
-            [key: string]: string;
-          };
-        }[];
+          targets?: {
+            module?: string;
+            importName: string;
+          }[];
+          bindings?: {
+            bindTarget: string;
+            bindMap: {
+              [key: string]: string;
+            };
+          }[];
+        };
         mountPoints?: {
           mountPoint: string;
           module?: string;

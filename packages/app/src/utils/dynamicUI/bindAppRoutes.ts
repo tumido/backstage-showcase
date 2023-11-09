@@ -6,14 +6,12 @@ import { orgPlugin } from '@backstage/plugin-org';
 import { scaffolderPlugin } from '@backstage/plugin-scaffolder';
 import { techdocsPlugin } from '@backstage/plugin-techdocs';
 import get from 'lodash/get';
-import {
-  RemotePlugins,
-  RouteBinding,
-} from '../../components/DynamicRoot/DynamicRootContext';
+import { RouteBinding } from '../../components/DynamicRoot/DynamicRootContext';
+import { BackstagePlugin } from '@backstage/core-plugin-api';
 
 const bindAppRoutes = (
   bind: AppRouteBinder,
-  remotePlugins: RemotePlugins,
+  routeBindingTargets: { [key: string]: BackstagePlugin<{}> },
   routeBindings: RouteBinding[],
 ) => {
   // Static bindings
@@ -34,10 +32,11 @@ const bindAppRoutes = (
   });
 
   const availableBindPlugins = {
-    remotePlugins,
+    ...routeBindingTargets,
     catalogPlugin,
     catalogImportPlugin,
     techdocsPlugin,
+    scaffolderPlugin,
   };
   // binds from remote
   routeBindings.forEach(({ bindTarget, bindMap }) => {
